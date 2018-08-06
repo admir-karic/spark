@@ -15,7 +15,11 @@ class MemberMiddleware
      */
     public function handle($request, Closure $next)
     {
-	if ($request->user() && $request->user()->type != 'member')
+	if ($request->user() && ($request->user()->type != 'registered' && $request->user()->type !='admin'))
+		{
+			return redirect('/');
+		}
+		if($request->user()->banned==true)
 		{
 			return redirect('/');
 		}

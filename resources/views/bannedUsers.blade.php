@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="col-3"></div>
 				<div class="col-4">
-					<input id="username" type="text" class="form-control" name="username" placeholder="Username...">
+					<input id="username" type="text" class="form-control" name="username" placeholder="Search...">
 				</div>
 				<div class="col-2">
 					<button type="submit" class="btn btn-primary btn-block"><i class="fas fa-search"></i></button>

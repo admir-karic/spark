@@ -14,6 +14,6 @@ class Category extends Model
 
 	public function games()
 	{
-		return $this->belongsToMany('App\Game');
+		return $this->belongsToMany('App\Game','game_categories','category_id','game_id');
 	}
 }

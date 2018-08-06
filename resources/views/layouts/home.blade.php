@@ -25,13 +25,16 @@
 			.fact-height{height:150px;}
 			.vcenter{position: relative;top: 50%;transform: translateY(-50%);}
 			.divcenter {position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}
-			.img-h{height:400px};
+			.img-h{height:400px;}
+			.bg-nav{background-color:#0c0c0c;}
+			.resize-none{resize:none;}
+			body{background-color:#211f1f;}
 		</style>
 		<!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
     </head>
     <body>
 		<div class="navbar-brand"></div>
-		<nav class="navbar navbar-expand-md navbar-dark bg-black fixed-top">
+		<nav class="navbar navbar-expand-md navbar-dark bg-nav fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
 					PlayZone
@@ -57,14 +60,16 @@
 									</li>
 								@endif
 								<li class="nav-item">
-									<a class="nav-link" href="{{ route('admin') }}">Store</a>
+									<a class="nav-link" href="{{ route('store') }}">Store</a>
 								</li>
+								@if(\Request::is('/'))
 								<li class="nav-item">
 									<a class="nav-link" href="#about">About</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="#contact">Contact</a>
 								</li>
+								@endif
 								<li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->username }} <span class="caret"></span>
@@ -105,14 +110,5 @@
 		<div class="container-fluid text-center">
 			@yield('content')
 		</div>
-
-		<footer class="page-footer font-small bg-black border-top border-secondary">
-			<!-- Copyright -->
-			<div class="text-center p-3">
-				<span class="text-light">&copy; 2018 Copyright: PlayZone</span>
-			</div>
-			<!-- Copyright -->
-
-	</footer>
     </body>
 </html>

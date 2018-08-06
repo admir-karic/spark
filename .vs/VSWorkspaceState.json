@@ -4,13 +4,13 @@
     "\\app",
     "\\app\\Http",
     "\\app\\Http\\Controllers",
-    "\\public",
-    "\\public\\css",
-    "\\resources",
-    "\\resources\\views",
-    "\\resources\\views\\layouts",
-    "\\routes"
+    "\\app\\Http\\Controllers\\Auth",
+    "\\app\\Http\\Middleware",
+    "\\database",
+    "\\database\\migrations",
+    "\\database\\seeds",
+    "\\public"
   ],
-  "SelectedNode": "\\resources\\views\\layouts\\admin.blade.php",
+  "SelectedNode": "\\resources\\views\\layouts\\home.blade.php",
   "PreviewInSolutionExplorer": false
 }

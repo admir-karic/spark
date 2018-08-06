@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="col-3"></div>
 				<div class="col-4">
-					<input id="category" type="text" class="form-control" name="category" placeholder="Category name...">
+					<input id="category" type="text" class="form-control" name="category" placeholder="Search...">
 				</div>
 				<div class="col-2">
 					<button type="submit" class="btn btn-primary btn-block"><i class="fas fa-search"></i></button>

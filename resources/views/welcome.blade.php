@@ -27,11 +27,28 @@
 		</div>
 	</div>
 
-	<div id="contact" class="row bg-dark">
-		a
+	<div id="contact" class="row bg-black text-white border-top border-secondary">
+		<div class="col-12">
+			<div class="row fact-height">
+				<div class="col-2"></div>
+				<div class="col-8">
+					<h3 class="vcenter">CONTACT<h3>
+					</div>
+			</div>
+
+			<div class="row">
+				<div class="col-2"></div>
+				<div class="col-8">
+					<a href="#"><i class="col-1 fab fa-facebook-square fa-lg"></i></a>
+					<a href="#"><i class="fab fa-instagram fa-lg"></i></a>
+					<br>
+					<p>Email: example@mail.com<p>
+					</div>
+			</div>
+		</div>
 	</div>
 
-	<div class="row bg-black text-white fact-height">
+	<div class="row bg-black text-white fact-height border-top border-secondary">
 		<div class="col-12">
 			<h3 class="vcenter">SOME FACTS<h3>
 		</div>

@@ -9,6 +9,7 @@ use App\Specification;
 use App\PlayerNumber;
 use App\Category;
 use App\Language;
+use App\Discount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -194,6 +195,30 @@ class AdminController extends Controller
 		return redirect()->back();
 	}
 
+	public function addCategoryGame(){
+		$categories = Category::all();
+		$games=Game::all();
+
+		return view('addCategoryGame',['categories'=>$categories,'games'=>$games]);
+	}
+
+	public function saveCategoryGame(Request $request){
+
+		$game = Game::findOrFail($request->input('game'));
+		$categories= Category::findMany($request->categories);
+		foreach($categories as $category)
+		{
+			if($game->categories()->where('category_id',$category->id)->exists())
+				return redirect('admin/add-category-game');
+		}
+		foreach($categories as $category)
+		{
+			$game->categories()->attach($category);
+		}
+
+		return redirect('admin/add-category-game');
+	}
+
 	/*     LANGUAGES     */
 
 	public function getLanguages()
@@ -233,6 +258,168 @@ class AdminController extends Controller
 		$language= new Language();
 		$language->name=$request->input('languagename');
 		$language->save();
+		return redirect()->back();
+	}
+
+	public function addLanguageGame(){
+		$languages = Language::all();
+		$games=Game::all();
+
+		return view('addLanguageGame',['languages'=>$languages,'games'=>$games]);
+	}
+
+	public function saveLanguageGame(Request $request){
+
+		$game = Game::findOrFail($request->input('game'));
+		$languages= Language::findMany($request->languages);
+		foreach($languages as $language)
+		{
+			if($game->languages()->where('language_id',$language->id)->exists())
+				return redirect('admin/add-language-game');
+		}
+		foreach($languages as $language)
+		{
+			$game->languages()->attach($language);
+		}
+
+		return redirect('admin/add-language-game');
+	}
+
+	/*     DISCOUNTS     */
+
+	public function getDiscounts()
+	{
+		$discounts=Discount::all();
+		
+		return view('discounts',['discounts'=>$discounts]);
+	}
+
+	public function searchDiscounts(Request $request)
+	{
+		$discount=$request->input('discount');
+		$discounts=Discount::where('value','LIKE','%'.$discount."%")->get();
+		return view('discounts',['discounts'=>$discounts]);
+	}
+
+	public function deleteDiscount($id)
+	{
+		$discount=Discount::findOrFail($id);
+		$discount->delete();
+
+		return redirect('admin/discounts');
+	}
+
+	public function addDiscount()
+	{
+		$discounts = Discount::all();
+		return view('addDiscount',['discounts'=>$discounts]);
+	}
+
+	public function saveDiscount(Request $request)
+	{
+		$request->validate([
+            'code' => 'required|string|min:3|max:25',
+			'discountvalue' => 'required|numeric|gte:0'
+        ]);
+
+		$discount= new Discount();
+		$discount->code=$request->input('code');
+		$discount->value=$request->input('discountvalue');
+		$discount->save();
+		return redirect()->back();
+	}
+
+	/*     SPECIFICATIONS     */
+
+	public function getSpecifications()
+	{
+		$specifications=Specification::all();
+		
+		return view('specifications',['specifications'=>$specifications]);
+	}
+
+	public function searchSpecifications(Request $request)
+	{
+		$specification=$request->input('specification');
+		$specifications=Specification::where('game','LIKE','%'.$specification."%")->get();
+		return view('specifications',['specifications'=>$specifications]);
+	}
+
+	public function deleteSpecification($id)
+	{
+		$specification=Specification::findOrFail($id);
+		$specification->delete();
+
+		return redirect('admin/specifications');
+	}
+
+	public function addSpecification()
+	{
+		$specifications = Specification::all();
+		return view('addSpecification',['specifications'=>$specifications]);
+	}
+
+	public function saveSpecification(Request $request)
+	{
+		$request->validate([
+            'game' => 'required|string|min:3|max:25|unique:specifications,game',
+			'os' => 'required|min:3|regex:/^[A-Za-z0-9\.@() \/]+$/',
+			'processor' => 'required|string|min:3',
+			'memory' => 'required|string|min:3|max:15',
+			'graphics' => 'required|string|min:3',
+			'hd' => 'required|string|min:3|max:25',
+        ]);
+
+		$specification= new Specification();
+		$specification->game=$request->input('game');
+		$specification->os=$request->input('os');
+		$specification->processor=$request->input('processor');
+		$specification->memory=$request->input('memory');
+		$specification->graphics=$request->input('graphics');
+		$specification->hard_drive=$request->input('hd');
+		$specification->save();
+		return redirect()->back();
+	}
+
+	/*     PLAYER NUMBER     */
+
+	public function getPlayerNumbers()
+	{
+		$playerNumbers=PlayerNumber::all();
+		
+		return view('playerNumbers',['playerNumbers'=>$playerNumbers]);
+	}
+
+	public function searchPlayerNumbers(Request $request)
+	{
+		$playerNumber=$request->input('playernumber');
+		$playerNumbers=PlayerNumber::where('name','LIKE','%'.$playerNumber."%")->get();
+		return view('playerNumbers',['playerNumbers'=>$playerNumbers]);
+	}
+
+	public function deletePlayerNumber($id)
+	{
+		$playerNumber=PlayerNumber::findOrFail($id);
+		$playerNumber->delete();
+
+		return redirect('admin/player-numbers');
+	}
+
+	public function addPlayerNumber()
+	{
+		$playerNumbers = PlayerNumber::all();
+		return view('addPlayerNumber',['playerNumbers'=>$playerNumbers]);
+	}
+
+	public function savePlayerNumber(Request $request)
+	{
+		$request->validate([
+            'playernumbername' => 'required|string|min:3|max:25',
+        ]);
+
+		$playerNumber= new PlayerNumber();
+		$playerNumber->name=$request->input('playernumbername');
+		$playerNumber->save();
 		return redirect()->back();
 	}
 }

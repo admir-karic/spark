@@ -13,22 +13,22 @@ class DiscountsTableSeeder extends Seeder
     public function run()
     {
         Discount::create([
-            'code' => bcrypt('abc123'),
+            'code' => 'abc123',
             'value' => '5'
         ]);
 
 		Discount::create([
-            'code' => bcrypt('abc567'),
+            'code' => 'abc567',
             'value' => '15'
         ]);
 
 		Discount::create([
-            'code' => bcrypt('def123'),
+            'code' => 'def123',
             'value' => '50'
         ]);
 
 		Discount::create([
-            'code' => bcrypt('def567'),
+            'code' => 'def567',
             'value' => '75'
         ]);
     }

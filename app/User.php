@@ -29,7 +29,7 @@ class User extends Authenticatable
 
 	public function games()
 	{
-		return $this->belongsToMany('App\Game')->withPivot('value', 'comment')->as('review');
+		return $this->belongsToMany('App\Game','reviews','user_id','game_id')->withPivot('value', 'comment')->using('App\Review');
 	}
 
 	public function orders()

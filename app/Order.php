@@ -13,7 +13,7 @@ class Order extends Model
 
 	public function games()
 	{
-		return $this->belongsToMany('App\Game');
+		return $this->belongsToMany('App\Game','game_orders','order_id','game_id');
 	}
 
 	public function discount()
